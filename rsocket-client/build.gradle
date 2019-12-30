@@ -3,9 +3,20 @@ project(":rsocket-client") {
         implementation project(':rsocket-model')
         implementation 'org.springframework.boot:spring-boot-starter-rsocket'
         implementation 'org.springframework.boot:spring-boot-starter-webflux'
+        implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
         implementation 'org.springframework.boot:spring-boot-devtools'
 
         compileOnly("org.projectlombok:lombok")
         annotationProcessor("org.projectlombok:lombok")
     }
+    node {
+        version = '12.14.0'
+        npmVersion = '6.13.4'
+        download = true
+        nodeModulesDir = file("${project.projectDir}")
+    }
+
+    npm_run_build.dependsOn npm_install
+    processResources.dependsOn npm_run_build
+    //npm_run_webpack_dev.dependsOn npm_install
 }
