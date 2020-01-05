@@ -9,7 +9,7 @@ import lombok.AllArgsConstructor;
 @Controller
 public class RSocketMavController {
     @GetMapping("/index")
-    public String index(){
+    public String index() {
         return "index";
     }
 }

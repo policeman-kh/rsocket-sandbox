@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 @Configuration
 public class ClientConfiguration {
     private final RSocketRequester.Builder builder;
+
     @Bean
     public RSocketRequester rSocketRequester() {
         return builder.connectTcp("localhost", 7000).block();
