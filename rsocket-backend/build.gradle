@@ -1,4 +1,4 @@
-project(":rsocket-backend1") {
+project(":rsocket-backend") {
     dependencies {
         implementation project(':rsocket-model')
         implementation 'org.springframework.boot:spring-boot-starter-rsocket'

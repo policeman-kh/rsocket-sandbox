@@ -18,5 +18,4 @@ project(":rsocket-client") {
 
     npm_run_build.dependsOn npm_install
     processResources.dependsOn npm_run_build
-    //npm_run_webpack_dev.dependsOn npm_install
 }

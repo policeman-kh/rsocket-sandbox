@@ -1,6 +1,9 @@
 package sandbox.rsocket;
 
+import java.time.Duration;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Controller;
@@ -13,7 +16,7 @@ import reactor.core.publisher.Mono;
 @Slf4j
 @AllArgsConstructor
 @Controller
-public class RSocketController {
+public class RSocketServerController {
     @MessageMapping("getMono")
     public Mono<ResponseData> getMono(RequestData requestData) {
         log.info("Calling getMono method. request={}", requestData);
@@ -23,9 +26,12 @@ public class RSocketController {
     @MessageMapping("getFlux")
     public Flux<ResponseData> getFlux(RequestData requestData) {
         log.info("Calling getFlux method. request={}", requestData);
-        final List<ResponseData> list = List.of(new ResponseData(requestData.getMessage() + "_1"),
-                                                new ResponseData(requestData.getMessage() + "_2"),
-                                                new ResponseData(requestData.getMessage() + "_3"));
-        return Flux.fromIterable(list);
+        final List<ResponseData> list =
+                IntStream.rangeClosed(1, 10)
+                         .boxed()
+                         .map(i -> new ResponseData(requestData.getMessage() + '_' + i))
+                         .collect(Collectors.toList());
+        return Flux.fromIterable(list)
+                   .delayElements(Duration.ofSeconds(1));
     }
 }
