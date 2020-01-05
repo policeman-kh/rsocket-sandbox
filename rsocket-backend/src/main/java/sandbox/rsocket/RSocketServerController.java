@@ -17,12 +17,19 @@ import reactor.core.publisher.Mono;
 @AllArgsConstructor
 @Controller
 public class RSocketServerController {
+    /**
+     * Get response data with mono.
+     */
     @MessageMapping("getMono")
     public Mono<ResponseData> getMono(RequestData requestData) {
         log.info("Calling getMono method. request={}", requestData);
         return Mono.just(new ResponseData(requestData.getMessage()));
     }
 
+    /**
+     * Get response data with flux.
+     * Responds one of the response data every seconds.
+     */
     @MessageMapping("getFlux")
     public Flux<ResponseData> getFlux(RequestData requestData) {
         log.info("Calling getFlux method. request={}", requestData);

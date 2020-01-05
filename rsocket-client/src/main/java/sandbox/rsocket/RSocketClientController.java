@@ -16,11 +16,17 @@ import reactor.core.publisher.Mono;
 public class RSocketClientController {
     private final WebClient webClient;
 
+    /**
+     * Get response mono data.
+     */
     @GetMapping("/mono")
     public Mono<ResponseData> mono(@RequestParam String message) {
         return webClient.getMono(new RequestData(message));
     }
 
+    /**
+     * Get response flux data with server sent events.
+     */
     @GetMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE, value = "/flux")
     public Flux<ResponseData> flux(@RequestParam String message) {
         return webClient.getFlux(new RequestData(message));
