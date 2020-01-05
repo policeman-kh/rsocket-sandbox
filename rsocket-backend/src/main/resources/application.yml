@@ -2,5 +2,6 @@ spring:
   rsocket:
     server:
       port: 7000
-      #mapping-path: /rsocket
-      #transport: websocket
+      # Remove comment out if enable rsocket via websocket.
+      # mapping-path: /rsocket
+      # transport: websocket
