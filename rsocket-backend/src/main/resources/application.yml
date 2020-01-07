@@ -3,5 +3,6 @@ spring:
     server:
       port: 7000
       # Remove comment out if enable rsocket via websocket.
+      # See the link for the details. https://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/html/spring-boot-features.html#boot-features-rsocket-strategies-auto-configuration
       # mapping-path: /rsocket
       # transport: websocket
