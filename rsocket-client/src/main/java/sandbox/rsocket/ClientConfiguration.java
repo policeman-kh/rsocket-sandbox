@@ -5,7 +5,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.rsocket.RSocketRequester;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @AllArgsConstructor
 @Configuration
 public class ClientConfiguration {
@@ -13,6 +15,8 @@ public class ClientConfiguration {
 
     @Bean
     public RSocketRequester rSocketRequester() {
-        return builder.connectTcp("localhost", 7000).block();
+        return builder.connectTcp("localhost", 7000)
+                      .doOnNext(socket -> log.info("Connected to RSocket."))
+                      .block();
     }
 }
